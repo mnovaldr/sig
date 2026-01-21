@@ -1,7 +1,3 @@
-
-Sorotan folder
-Peta tematik ini memvisualisasikan sebaran Kantor Notaris di Kecamatan Kedungkandang menggunakan data geografis jalan dan permukiman.
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -74,6 +70,43 @@ Peta tematik ini memvisualisasikan sebaran Kantor Notaris di Kecamatan Kedungkan
             zoomControl:false, maxZoom:28, minZoom:1
         }).fitBounds([[-7.982361529044502,112.6510500824249],[-7.972025241657787,112.67158797918808]]);
         var hash = new L.Hash(map);
+        /* --- MULAI KODE TOMBOL BERANDA --- */
+        var homeControl = L.Control.extend({
+            options: {
+                position: 'topright' // Posisi kanan atas
+            },
+
+            onAdd: function (map) {
+                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+                // Styling agar mirip dengan tombol zoom/layer bawaan
+                container.style.backgroundColor = 'white';
+                container.style.width = '30px';
+                container.style.height = '30px';
+                container.style.lineHeight = '30px';
+                container.style.textAlign = 'center';
+                container.style.cursor = 'pointer';
+                container.style.boxShadow = '0 1px 5px rgba(0,0,0,0.4)';
+                container.title = "Kembali ke Beranda";
+
+                // Membuat Link
+                var link = document.createElement('a');
+                link.href = '../index.html'; // <--- GANTI INI DENGAN ALAMAT FILE BERANDA ANDA
+                link.style.display = 'block';
+                link.style.width = '100%';
+                link.style.height = '100%';
+                link.style.textDecoration = 'none';
+                link.style.color = 'black';
+                
+                // Menambahkan Ikon Rumah (FontAwesome sudah ada di header Anda)
+                link.innerHTML = '<i class="fas fa-home"></i>';
+
+                container.appendChild(link);
+                return container;
+            }
+        });
+        map.addControl(new homeControl());
+        /* --- SELESAI KODE TOMBOL BERANDA --- */
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         // remove popup's row if "visible-with-data"
