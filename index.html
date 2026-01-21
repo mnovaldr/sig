@@ -3,290 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WebGIS Notaris | Kecamatan Kedungkandang</title>
+    <title>WebGIS Persebaran Kantor Notaris</title>
 
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #0f172a;
-            --accent: #0ea5e9;
-            --surface: #ffffff;
-            --bg-body: #f8fafc;
-            --text-secondary: #64748b;
-            --gradient-primary: linear-gradient(135deg, #0f172a 0%, #334155 100%);
-            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
-            --shadow-hover: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+            --primary-color: #0A2647; /* Biru Tua */
+            --secondary-color: #144272; /* Biru Sedang */
+            --accent-color: #205295; /* Biru Aksen */
+            --light-bg: #f8f9fa;
+            --white-color: #ffffff;
+            --text-color: #343a40;
+            --text-muted-color: #6c757d;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
             line-height: 1.6;
-            overflow-x: hidden;
+            color: var(--text-color);
         }
 
-        /* --- Navbar Styles --- */
-        .navbar {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.35rem;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-icon-box {
-            width: 40px; 
-            height: 40px;
-            background: var(--gradient-primary);
-            color: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
-        }
-
-        /* --- Hero Section --- */
         .hero {
-            padding: 8rem 0 6rem;
-            background: radial-gradient(circle at top right, #e0f2fe 0%, transparent 40%),
-                        radial-gradient(circle at bottom left, #f1f5f9 0%, transparent 40%);
-            overflow: hidden;
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 5rem 0;
         }
 
         .hero h1 {
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.15;
-            color: var(--primary);
+            font-weight: 700;
+            font-size: 2.8rem;
         }
 
-        .hero-badge {
-            background: white;
-            color: var(--accent);
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            box-shadow: 0 2px 10px rgba(14, 165, 233, 0.1);
-            border: 1px solid rgba(14, 165, 233, 0.1);
-            display: inline-block;
-            margin-bottom: 1.5rem;
+        .hero .lead {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.15rem;
+            max-width: 800px;
         }
 
-        .btn-main {
-            background: var(--primary);
-            color: white;
-            padding: 12px 32px;
-            border-radius: 100px;
+        .map-wrapper {
+            height: 70vh;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-list .bi {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-right: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .btn-custom {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            padding: 0.75rem 2rem;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50px;
+            transition: all 0.3s ease;
             border: none;
         }
 
-        .btn-main:hover {
+        .btn-custom:hover {
+            background-color: var(--secondary-color);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
-            background: #1e293b;
-            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        .btn-outline-custom {
-            background: white;
-            border: 1px solid #cbd5e1;
-            color: var(--primary);
-            padding: 12px 32px;
-            border-radius: 100px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-custom:hover {
-            background: #f8fafc;
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* --- CLEAN FRAME (Pengganti Browser Mockup) --- */
-        .clean-frame {
-            position: relative;
-            border-radius: 24px;
-            background: white;
-            padding: 10px; /* Memberi jarak putih (padding) di sekitar gambar */
-            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .clean-frame img, .clean-frame iframe {
-            border-radius: 16px;
-            width: 100%;
-            display: block;
-        }
-
-        /* --- Cards --- */
-        .feature-card {
-            background: var(--surface);
-            padding: 2.5rem;
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(14, 165, 233, 0.3);
-        }
-
-        .feature-icon {
-            width: 56px;
-            height: 56px;
-            background: #f0f9ff;
-            color: var(--accent);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* --- Legend Badges --- */
-        .legend-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 2rem;
-        }
-
-        .legend-item {
-            background: white;
-            padding: 8px 16px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .legend-item:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .symbol { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
-
-        /* --- Footer --- */
         footer {
-            background: var(--primary);
-            color: #94a3b8;
-            padding-top: 5rem;
-            padding-bottom: 2rem;
-            margin-top: 5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted-color);
+            background-color: var(--white-color);
         }
 
-        .footer-brand {
-            color: white;
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            display: block;
+        /* Styling untuk layout peta */
+        .layout-container {
+            background-color: var(--white-color);
+            border-radius: 1rem;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            margin-bottom: 30px;
         }
 
-        .dev-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 1.5rem;
-            border-radius: 16px;
+        .layout-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        /* --- Layout Image Showcase --- */
-        .layout-showcase {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            border: 6px solid white; /* Frame putih solid */
+        .layout-image {
+            width: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            border: 1px solid #dee2e6;
+        }
+
+        .layout-image:hover {
+            transform: scale(1.02);
+        }
+
+        .layout-desc {
+            color: var(--text-muted-color);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .layout-highlight {
+            background-color: var(--light-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 0.5rem 0.5rem 0;
         }
         
-        .layout-showcase img {
-            width: 100%;
-            display: block;
-            transition: transform 0.5s ease;
-        }
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.75rem;
+                text-align: center;
+            }
+            
+            .map-wrapper {
+                height: 50vh;
+            }
+            
+            .info-card {
+                margin-bottom: 1rem;
+            }
 
-        .layout-showcase:hover img {
-            transform: scale(1.02);
+            .hero .lead, .hero .text-center {
+                text-align: center !important;
+            }
+            
+            .layout-container {
+                margin-bottom: 1rem;
+            }
+            
+            .layout-container {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-3" href="#">
-            <div class="nav-icon-box">
-                <i class="bi bi-geo-alt-fill"></i>
-            </div>
-            <span>WebGIS <span class="text-primary opacity-75 fw-normal">Notaris</span></span>
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#" style="color: var(--primary-color);">
+            <i class="bi bi-map-fill me-2" style="font-size: 1.5rem;"></i>
+            <span class="ms-2">WebGIS Notaris</span>
         </a>
     </div>
 </nav>
 
-<section class="hero d-flex align-items-center">
+<!-- Hero Section -->
+<section class="hero text-center">
     <div class="container">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
-                <div class="hero-badge">
-                    <i class="bi bi-stars me-1"></i> Pemetaan Digital Kec. Kedungkandang
-                </div>
-                <h1 class="display-4 mb-4">
-                    Analisis Spasial & <br>
-                    <span style="background: linear-gradient(90deg, #0f172a, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Persebaran Kantor Notaris</span>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h1 class="mb-3">
+                    Peta Tematik Persebaran Kantor Notaris
                 </h1>
-                <p class="lead text-secondary mb-5" style="max-width: 90%;">
-                    Platform interaktif visualisasi lokasi, aksesibilitas, dan pola distribusi layanan notaris terhadap infrastruktur kota secara real-time dan presisi.
+                <p class="lead mb-4 mx-auto">
+                    Visualisasi spasial lokasi kantor notaris di Kecamatan Kedungkandang berdasarkan jaringan jalan, 
+                    pemukiman, fasilitas umum, dan penggunaan lahan. Platform ini membantu memahami pola persebaran 
+                    dan aksesibilitas layanan notaris.
                 </p>
-                
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="peta_notaris/index.html" class="btn btn-main">
-                        <i class="bi bi-map-fill me-2"></i>Eksplorasi Peta
-                    </a>
-                    <a href="#about" class="btn btn-outline-custom">
-                        Pelajari Metode
-                    </a>
-                </div>
+                <a href="peta_notaris/index.html" class="btn btn-custom btn-lg">
+                    <i class="bi bi-geo-alt-fill me-2"></i> Buka Peta Interaktif
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <div class="row mt-5 pt-3 border-top">
-                    <div class="col-auto">
-                        <h3 class="fw-bold mb-0">11+</h3>
-                        <small class="text-secondary">Layer Tematik</small>
+<!-- Informasi Proyek Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title">Tentang Proyek</h2>
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card info-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold" style="color: var(--primary-color);"><i class="bi bi-bullseye me-2"></i>Tujuan</h5>
+                        <p class="card-text">
+                            Menyediakan informasi spasial yang akurat mengenai lokasi kantor notaris di Kecamatan 
+                            Kedungkandang untuk kepentingan penelitian, perencanaan, dan pengambilan keputusan 
+                            terkait distribusi layanan hukum.
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
-                <div class="clean-frame">
-                    <div class="position-relative" style="height: 400px; overflow: hidden; border-radius: 16px;">
-                        <img src="assets/img/Notaris Layout.jpg" alt="Preview App" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="col-lg-6">
+                <div class="card info-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold" style="color: var(--primary-color);"><i class="bi bi-tools me-2"></i>Metodologi</h5>
+                        <p class="card-text">
+                            Data dikumpulkan melalui survei lapangan dan sumber terbuka seperti OpenStreetMap. 
+                            Analisis spasial dilakukan untuk mengidentifikasi pola persebaran dan keterkaitan 
+                            dengan infrastruktur jalan.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -294,187 +254,264 @@
     </div>
 </section>
 
-<section id="about" class="py-5">
-    <div class="container py-5">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h6 class="text-accent fw-bold text-uppercase letter-spacing-2 mb-2">Mengapa WebGIS Ini?</h6>
-            <h2 class="fw-bold">Tentang Proyek</h2>
-            <div class="mx-auto mt-3" style="width: 60px; height: 4px; background: var(--accent); border-radius: 2px;"></div>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-bullseye"></i>
-                    </div>
-                    <h4>Presisi Tinggi</h4>
-                    <p class="text-secondary mb-0">Menyediakan koordinat geospasial akurat untuk analisis pemerataan layanan hukum di wilayah perkotaan padat penduduk.</p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-card" style="border-color: var(--accent); background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 100%);">
-                    <div class="feature-icon bg-white shadow-sm">
-                        <i class="bi bi-layers-fill"></i>
-                    </div>
-                    <h4>Integrasi Data</h4>
-                    <p class="text-secondary mb-0">Penggabungan data survei primer lapangan dengan basis data OpenStreetMap menggunakan metode analisis spasial modern.</p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <h4>Akses Mudah</h4>
-                    <p class="text-secondary mb-0">Teknologi berbasis web (Web-Based) yang ringan, responsif di HP/Desktop tanpa perlu instalasi aplikasi tambahan.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+<!-- Layout Peta Tematik -->
 <section class="py-5 bg-white">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5 order-lg-2 ps-lg-5" data-aos="fade-left">
-                <div class="d-inline-block px-3 py-1 bg-primary bg-opacity-10 text-primary rounded-pill fw-bold small mb-3">
-                    OUTPUT PETA
-                </div>
-                <h2 class="fw-bold mb-4">Layout Kartografi Standar</h2>
-                <p class="text-secondary mb-4">
-                    Layout peta dirancang mematuhi kaidah kartografi untuk memastikan informasi mudah dipahami oleh masyarakat umum maupun akademisi.
-                </p>
-                <ul class="list-unstyled text-secondary">
-                    <li class="mb-3 d-flex align-items-center"><i class="bi bi-check-circle-fill text-success me-3"></i> Grid Koordinat & Skala Presisi</li>
-                    <li class="mb-3 d-flex align-items-center"><i class="bi bi-check-circle-fill text-success me-3"></i> Simbologi Intuitif & Jelas</li>
-                    <li class="mb-3 d-flex align-items-center"><i class="bi bi-check-circle-fill text-success me-3"></i> 11 Layer Informasi Spasial</li>
-                </ul>
-            </div>
-            <div class="col-lg-7 order-lg-1" data-aos="fade-right">
-                <div class="layout-showcase">
-                    <img src="assets/img/Notaris Layout.jpg" alt="Layout Peta Digital">
-                </div>
-                <div class="text-center mt-3 small text-muted fst-italic">
-                    Gambar 1: Tampilan Layout Peta Cetak / Statis
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-5" style="background: #f8fafc;">
-    <div class="container py-5">
-        <div class="text-center mb-5" data-aos="fade-down">
-            <h2 class="fw-bold">Peta Interaktif</h2>
-            <p class="text-secondary">Eksplorasi data spasial secara langsung melalui jendela di bawah ini.</p>
-        </div>
-
-        <div class="clean-frame" data-aos="zoom-in">
-            <div class="position-relative">
-                <iframe src="peta_notaris/index.html" style="width: 100%; height: 600px; border: none; border-radius: 16px;" title="WebGIS Notaris"></iframe>
-                
-                <div class="position-absolute bottom-0 end-0 m-4">
-                    <a href="peta_notaris/index.html" class="btn btn-dark rounded-pill px-4 shadow-lg btn-sm">
-                        <i class="bi bi-arrows-fullscreen me-2"></i>Fullscreen
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-4" data-aos="fade-up">
-            <p class="text-center fw-bold text-secondary mb-3 small text-uppercase">Legenda Peta</p>
-            <div class="legend-container">
-                <div class="legend-item"><span class="symbol" style="background: #e74c3c;"></span> Lokasi Notaris</div>
-                <div class="legend-item"><span class="symbol" style="background: #000; height: 3px;"></span> Jalan Provinsi</div>
-                <div class="legend-item"><span class="symbol" style="background: #beb297;"></span> Pemukiman</div>
-                <div class="legend-item"><span class="symbol" style="background: #a6cee3;"></span> Fasilitas Umum</div>
-                <div class="legend-item"><span class="symbol" style="background: #becf50;"></span> Persawahan</div>
-                <div class="legend-item"><span class="symbol" style="background: #e15989;"></span> Batas Wilayah</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-5">
-                <span class="footer-brand">WebGIS Notaris</span>
-                <p class="text-white-50 mb-4">
-                    Sistem informasi geografis untuk pemetaan dan analisis lokasi kantor notaris di Kecamatan Kedungkandang. Dibangun untuk transparansi dan kemudahan akses informasi publik.
-                </p>
-                <div class="d-flex gap-3">
-                    <a href="https://github.com/mnovaldr/" class="btn btn-outline-light rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-github"></i></a>
-                    <a href="#" class="btn btn-outline-light rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-instagram"></i></a>
-                    <a href="mailto:halo@mnovaldr.dev" class="btn btn-outline-light rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-envelope-fill"></i></a>
+        <h2 class="section-title">Layout Peta Tematik</h2>
+        
+        <div class="layout-container">
+            <h3 class="layout-title">Peta Tematik Persebaran Kantor Notaris di Kecamatan Kedungkandang</h3>
+            
+            <!-- Gambar layout peta -->
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <img src="assets/img/Notaris Layout.jpg" alt="Layout Peta Tematik Persebaran Kantor Notaris" class="layout-image">
+                    <p class="layout-desc">
+                        <em>Gambar 1: Layout peta tematik persebaran kantor notaris di Kecamatan Kedungkandang</em>
+                    </p>
                 </div>
             </div>
             
-            <div class="col-lg-2 offset-lg-1">
-                <h6 class="text-white fw-bold mb-4">Menu</h6>
-                <ul class="list-unstyled d-flex flex-column gap-3">
-                    <li><a href="#" class="text-white-50 text-decoration-none hover-white">Beranda</a></li>
-                    <li><a href="#about" class="text-white-50 text-decoration-none hover-white">Tentang</a></li>
-                    <li><a href="peta_notaris/index.html" class="text-white-50 text-decoration-none hover-white">Peta Digital</a></li>
-                </ul>
+            <!-- Deskripsi layout -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="layout-highlight">
+                        <h5 class="fw-bold" style="color: var(--primary-color);"><i class="bi bi-rulers me-2"></i>Komponen Peta</h5>
+                        <ul class="mb-0">
+                            <li>Judul peta yang informatif</li>
+                            <li>Legenda dengan simbol yang jelas</li>
+                            <li>Skala peta dan orientasi</li>
+                            <li>Grid koordinat untuk referensi</li>
+                            <li>Sumber data dan kredit pembuat</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="layout-highlight">
+                        <h5 class="fw-bold" style="color: var(--primary-color);"><i class="bi bi-palette-fill me-2"></i>Desain Visual</h5>
+                        <ul class="mb-0">
+                            <li>Warna tematik yang konsisten</li>
+                            <li>Hierarki visual yang jelas</li>
+                            <li>Tata letak yang seimbang</li>
+                            <li>Tipografi yang mudah dibaca</li>
+                            <li>Simbol yang intuitif</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-lg-4">
-                <h6 class="text-white fw-bold mb-4">Pengembang</h6>
-                <div class="dev-card">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; flex-shrink: 0;">
-                            <i class="bi bi-person-fill"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-white mb-1">Muhammad Noval Dwi R.</h6>
-                            <small class="text-white-50 d-block">Mahasiswa Teknik Informatika</small>
-                            <small class="text-accent">Institut Asia Malang</small>
+            
+            <!-- Informasi legenda -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="p-3" style="background-color: var(--light-bg); border-radius: 0.5rem;">
+                        <h5 class="text-center mb-3">📋 Legenda Peta</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 20px; background-color: #e74c3c; border-radius: 50%; margin-right: 10px;"></div>
+                                    <span>Lokasi Notaris</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 3px; background-color: #000; margin-right: 10px;"></div>
+                                    <span>Jalan Provinsi</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 3px; background-color: #91522d; margin-right: 10px;"></div>
+                                    <span>Jalan Raya</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 20px; background-color: #beb297; margin-right: 10px;"></div>
+                                    <span>Pemukiman</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 20px; background-color: #a6cee3; margin-right: 10px;"></div>
+                                    <span>Fasilitas Umum</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 20px; background-color: #becf50; margin-right: 10px;"></div>
+                                    <span>Persawahan</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 20px; background-color: #a47158; margin-right: 10px;"></div>
+                                    <span>Bangunan</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 20px; background-color: #e15989; margin-right: 10px;"></div>
+                                    <span>Batas Kecamatan</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div style="width: 20px; height: 3px; background-color: #2ab71a; margin-right: 10px;"></div>
+                                    <span>Jalan Perumahan</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="text-center mt-4">
+            <p class="text-muted">
+                <small>Layout peta ini dirancang dengan prinsip kartografi untuk memastikan informasi spasial 
+                disajikan dengan jelas, akurat, dan mudah dipahami oleh pengguna.</small>
+            </p>
+        </div>
+    </div>
+</section>
 
-        <div class="border-top border-white border-opacity-10 pt-4 mt-5 text-center">
-            <small class="text-white-50">&copy; 2026 WebGIS Project. All rights reserved.</small>
+<!-- Fitur Peta -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title">Fitur Peta</h2>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <ul class="feature-list list-unstyled">
+                    <li><i class="bi bi-stack"></i><div><strong>Layer Tematik Lengkap</strong><br>11 layer informasi termasuk jaringan jalan, pemukiman, dll.</div></li>
+                    <li><i class="bi bi-palette"></i><div><strong>Legenda Interaktif</strong><br>Mudah memahami simbol dan warna pada peta.</div></li>
+                    <li><i class="bi bi-zoom-in"></i><div><strong>Zoom & Navigasi</strong><br>Kontrol penuh untuk eksplorasi wilayah.</div></li>
+                    <li><i class="bi bi-phone"></i><div><strong>Desain Responsif</strong><br>Dapat diakses dari desktop maupun mobile.</div></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <ul class="feature-list list-unstyled">
+                    <li><i class="bi bi-info-circle"></i><div><strong>Informasi Detail</strong><br>Klik fitur untuk melihat informasi spesifik.</div></li>
+                    <li><i class="bi bi-search"></i><div><strong>Pencarian Lokasi</strong><br>Temukan area tertentu dengan mudah.</div></li>
+                    <li><i class="bi bi-map"></i><div><strong>Pilihan Base Map</strong><br>Pilih jenis peta dasar sesuai kebutuhan.</div></li>
+                    <li><i class="bi bi-box-arrow-down"></i><div><strong>Siap Ekspor</strong><br>Siap untuk presentasi dan analisis lanjutan.</div></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistik & Info Section -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="p-4 bg-white border rounded info-card text-center">
+                    <div class="fw-bold fs-2 mb-2" style="color: var(--accent-color);"><i class="bi bi-pin-map-fill"></i></div>
+                    <strong>Wilayah Studi</strong>
+                    <div class="text-muted small">Kecamatan Kedungkandang</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-4 bg-white border rounded info-card text-center">
+                    <div class="fw-bold fs-2 mb-2" style="color: var(--accent-color);"><i class="bi bi-layers-fill"></i></div>
+                    <strong>Layer Data</strong>
+                    <div class="text-muted small">11 Layer Tematik</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-4 bg-white border rounded info-card text-center">
+                    <div class="fw-bold fs-2 mb-2" style="color: var(--accent-color);"><i class="bi bi-database-fill-check"></i></div>
+                    <strong>Sumber Data</strong>
+                    <div class="text-muted small">OSM & Data Lapangan</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-4 bg-white border rounded info-card text-center">
+                    <div class="fw-bold fs-2 mb-2" style="color: var(--accent-color);"><i class="bi bi-display-fill"></i></div>
+                    <strong>Platform</strong>
+                    <div class="text-muted small">WebGIS Interaktif</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Peta Preview -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title">Pratinjau Peta Interaktif</h2>
+        <p class="mb-4">
+            Eksplorasi peta interaktif yang menampilkan persebaran kantor notaris beserta 
+            infrastruktur pendukungnya. Klik tombol di bawah untuk membuka peta penuh.
+        </p>
+        
+        <div class="map-wrapper mb-4">
+            <iframe src="peta_notaris/index.html" width="100%" height="100%" frameborder="0" 
+                    title="Peta Persebaran Kantor Notaris"></iframe>
+        </div>
+        
+        <div class="text-center">
+            <a href="peta_notaris/index.html" class="btn btn-custom btn-lg">
+                <i class="bi bi-arrows-fullscreen me-2"></i> Buka Peta Interaktif Lengkap
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Legenda Singkat -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="section-title">Simbol Utama Peta</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <i class="bi bi-geo-alt-fill me-2 text-danger"></i>
+                    <strong>Lokasi Notaris</strong> - Kantor pelayanan notaris
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-sign-turn-right-fill me-2" style="color: #000;"></i>
+                    <strong>Jalan Provinsi</strong> - Jalan utama tingkat provinsi
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-house-door-fill me-2" style="color: #beb297;"></i>
+                    <strong>Pemukiman</strong> - Kawasan permukiman penduduk
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-building-fill me-2" style="color: #a6cee3;"></i>
+                    <strong>Fasilitas Umum</strong> - Fasilitas publik
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <i class="bi bi-image-alt me-2" style="color: #becf50;"></i>
+                    <strong>Persawahan</strong> - Lahan pertanian
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-app-indicator me-2" style="color: #a47158;"></i>
+                    <strong>Bangunan</strong> - Struktur bangunan
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-sign-turn-right-fill me-2" style="color: #91522d;"></i>
+                    <strong>Jalan Raya</strong> - Jalan utama
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-sign-turn-right-fill me-2" style="color: #2ab71a;"></i>
+                    <strong>Jalan Perumahan</strong> - Jalan lingkungan
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 border-top" style="background-color: var(--primary-color); color: var(--light-bg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-2">
+                    © 2026 · WebGIS Persebaran Kantor Notaris · Kecamatan Kedungkandang
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <p class="mb-0">
+                    Dibuat oleh: <strong>Muhammad Noval Dwi Ramadhani</strong><br>
+                    <span style="color: rgba(255,255,255,0.7);">Institut Asia Malang</span>
+                </p>
+            </div>
         </div>
     </div>
 </footer>
 
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-        once: true,
-        offset: 100,
-        duration: 800,
-        easing: 'ease-out-cubic'
-    });
-
-    // Navbar Effect
-    window.addEventListener('scroll', function() {
-        const nav = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            nav.style.background = 'rgba(255, 255, 255, 0.95)';
-            nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
-        } else {
-            nav.style.background = 'rgba(255, 255, 255, 0.85)';
-            nav.style.boxShadow = 'none';
-        }
-    });
-</script>
-
-<style>
-    .hover-white:hover { color: white !important; }
-    
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-    }
-</style>
 
 </body>
 </html>
